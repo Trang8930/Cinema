@@ -1,0 +1,33 @@
+
+.seatBooking {
+    text-align: center;
+}
+
+.seatNumber {
+    display: inline;
+    padding: 10px;
+    background-color: #5c86eb;
+    color: #fff;
+    border-radius: 7px;
+    line-height: 25px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.seatRowName {
+    display: inline;
+    padding: 10px;
+}
+
+.seatRow {
+    padding: 40px;
+}
+
+.seatDisable {
+    background-color: gray;
+}
+
+.seatSelected {
+    background-color: lightgreen;
+    color: black;
+}

@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Middleware;
+use Illuminate\Support\Facades\Auth;
 
 use Closure;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class AdminMiddleware
 {
@@ -18,14 +17,14 @@ class AdminMiddleware
     public function handle($request, Closure $next)
     {
         if (Auth::check()) {
-            if( Auth::user()->is_active == User::IS_ACTIVE) {
-                if(Auth::user()->role == User::IS_ADMIN) {
-                    return $next($request);
-                }
-                return redirect('/');
-            }
-            return redirect()->route("confirm.view");            
+            $user=Auth::user();
+            if ($user->level==1) 
+                return $next($request);
+            else
+                return redirect('/dangnhap');
         }
-        return redirect('/login');
+        else
+            return redirect('/dangnhap');
+        
     }
 }

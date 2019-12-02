@@ -11,65 +11,92 @@
 |
 */
 
+Route::get('','HomeController@trangchu');
 
-Auth::routes();
+Route::get('phim/{idphim}','HomeController@chitietphim')->where(['idphim'=>'[0-9]+']);
 
-Route::get('confirm', function () {
-    return view('confirm.confirm');
-})->name('confirm.view');
-Route::get('/users/{accessToken}/register', 'Admin\SendMailController@confirmRegistation')->name('register.confirm');
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['admin', 'auto_logout']], function () {
-    Route::get('/', 'HomeController@index')->name('home.index');
+Route::get('phimdangchieu','HomeController@phimdangchieu');
 
-    Route::resource('/users', 'UserController');
-    Route::post('/users/{accessToken}/updateActive', 'UserController@updateActive')->name('user.updateActive');
-    Route::post('/users/{accessToken}/updateRole', 'UserController@updateRole')->name('user.updateRole');
-    
-    Route::resource('/cities', 'CityController');
+Route::get('phimsapchieu','HomeController@phimsapchieu');
 
-    Route::resource('/cinemas', 'CinemaController');
-    Route::get('/cinemas/{cinema_id}/city', 'CinemaController@getListCinemabyCityId')->name('cinemas.showListByCityId');
-    
-    Route::resource('/films', 'FilmController');
-    Route::put('/films/{id}/updateActive', 'FilmController@updateActive')->name('films.updateActive');
-    Route::post("/films/importFilms", "FilmController@importExcel")->name("films.import");
+Route::get('datve/{id}','HomeController@chitietdatve');
 
-    Route::resource('/seats', 'SeatController');
+Route::get('review/{id}','HomeController@review');
+Route::get('blog/{id}','HomeController@blog');
 
-    Route::resource('/schedules', 'ScheduleController');
-    Route::put('/schedules/{date}/{room_id}/updateSchedule', 'ScheduleController@updateSchedule')->name('schedules.updateSchedule');
-    Route::get('/films/{id}/getData', 'FilmController@getData')->name('films.getData');
+Route::group(['prefix' => 'admin','middleware' => 'admin'], function() {
+	Route::get('/','AdminController@homeadmin');
+	Route::get('qlyphim','AdminController@Qlyphim');
+	Route::get('qlytintuc','AdminController@Qlytintuc');
+	Route::get('qlyrap','AdminController@Qlyrap');
+	Route::get('qlylichchieu','AdminController@lichchieu');
+	Route::get('qlyphong','AdminController@dsphong');
+	Route::get('qlyghe','AdminController@dsghe');
+	Route::get('qlycombo','AdminController@dscombo');
+	Route::get('qlyuser','AdminController@dsuser');
+	Route::get('qlyve','AdminController@dsve');
+	Route::get('addphim','AdminController@addphim');
+	Route::post('formaddphim','AdminController@addphimmoi');
+	Route::get('updatephim/{id}','AdminController@editphim');
+	Route::post('formeditphim/{id}','AdminController@validationphim');
+	Route::get('xoaphim/{idphim}','AdminController@xoap');
 
-    Route::resource('/rooms', 'RoomController');
-    Route::get('/rooms/{cinema_id}/listRoom', "RoomController@listRoomByCinemaID");
+	Route::get('formtintuc','AdminController@formtintuc');
+	Route::post('addtintuc','AdminController@addtintuc');
+	Route::get('suatintuc/{idtt}','AdminController@formsuatintuc');
+	Route::post('suatintuc/{idtt}','AdminController@suatintuc');
+	Route::get('xoatintuc/{idtt}','AdminController@xoatintuc');
 
-    Route::get('/bookings', 'BookingController@index')->name('bookings.index');
-    Route::get('/bookings/export', 'BookingController@export')->name('bookings.export');
+	Route::get('addrap','AdminController@addrap');
+	Route::post('addrap','AdminController@addmoirap');
+	Route::get('suarap/{id}','AdminController@formsuarap');
+	Route::post('suarap/{id}','AdminController@suarap');
+	Route::get('xoarap/{id}','AdminController@xoarap');
 
-    
+	Route::get('addlichchieu','AdminController@formlich');
+	Route::post('addlich','AdminController@addlich');
+	Route::get('sualichchieu/{idlc}','AdminController@formsualich');
+	Route::post('sualich/{idlc}','AdminController@sualich');
+	Route::get('xoalich/{id}','AdminController@xoalichchieu');
+
+	Route::get('addphong','AdminController@formphong');
+	Route::post('addphong','AdminController@addphong');
+	Route::get('suaphong/{id}','AdminController@formsuaphong');
+	Route::post('suaphong/{id}','AdminController@suaphong');
+	Route::get('xoaphong/{id}','AdminController@xoaphong');
+
+	Route::get('addcombo','AdminController@formcombo');
+	Route::post('addcombo','AdminController@addcombo');
+	Route::get('xoacombo/{id}','AdminController@xoacombo');
+	Route::get('suacombo/{id}','AdminController@formsuacombo');
+	Route::post('suacombo/{id}','AdminController@suacombo');
+
+});
+Route::get('ajax/ghe/{id}','AdminController@showghe');
+Route::get('ajax/lichchieu/{id}','AdminController@getlich');
+Route::get('ajax/phong/{id}','AdminController@getphong');
+Route::get('dangnhap','HomeController@formdangnhap');
+Route::post('login','Controller@dangnhap');
+Route::get('dangky','Controller@getdangky');
+Route::post('dangky','HomeController@postdangky');
+Route::get('dangxuat','HomeController@dangxuat');
+Route::get('xemlich','HomeController@lich');
+// Route::resource('ajaxdatve', 'datveajax');
+Route::get('/ajaxdatve','HomeController@datve');
+Route::post('cmt/{id}','HomeController@postcmt')->middleware('admin');
+
+Route::group(['prefix' => 'user','middleware' => 'auth'], function() {
+	Route::get('/','UserController@index');
 });
 
-Route::group(['namespace' => 'User'], function () {
-    Route::get('/', 'HomeFEController@index')->name("homepage");
-    
-    Route::resource("/contact", "ContactFEController");
-  
-    Route::resource("/reviews", "ReviewFEController");
 
-    Route::resource("/videos", "FilmFEController");
+Route::get('lienket', function() {
+   // $lk=App\ve::where('id_lichchieu',1)->get();
 
-    Route::get("/films/{id_schedule}/booking", "BookTicketController@booking")->name("films.booking");
-    Route::get("/payment/booking", "BookTicketController@payment")->name("films.payment");
-    Route::post("/films/{user_id}/{id_schedule}/booking", "BookTicketController@createBooking")->name("films.createBooking");
-    Route::post("/films/booking/store", "BookTicketController@store")->name("films.booking.store");
-
-    Route::get("/cities/available", "CityController@showCityHaveCinema")->name("cities.available");
-
-    Route::get("/cinemas", "CinemaController@index")->name("cinemasFE.index");
-
-    Route::get("/schedules", "ScheduleController@index")->name("scheduleFE.index");
-
-    Route::resource("/comments", "CommentController");
-
-    Route::post ('/account/stripe_card_token', 'BookTicketController@striperCard')->name('striper.card');
+   // foreach ($lk as $l) {
+   // 	echo $l->ghe->id;
+   // }
+   $lich=App\ve::find(1)->lichchieu->phim;
+   return $lich;
 });
+Route::get('themghe', 'HomeController@themghe');
