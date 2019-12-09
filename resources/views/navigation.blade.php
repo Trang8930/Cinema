@@ -5,16 +5,7 @@
 	</button>
 	<div class="collapse navbar-collapse" id="menu">
 		<ul class="navbar-nav m-auto">
-			<li>
-				<form class="input-group" action="{{ route('search')}}" method="get">
-					<input type="text" class="form-control" name="search" placeholder="Tên phim..." required>
-					<div class="input-group-append">
-						<button class="btn btn-secondary" type="submit">
-							<i class="fa fa-search"></i>
-						</button>
-					</div>
-				</form>
-			</li>
+			
 			<li class="nav-item dropdown pl-4">
 				<a href="/" class="nav-link dropdown-toggle" id="menu2" data-toggle="dropdown">Phim</a>
 				<div class="dropdown-menu">
