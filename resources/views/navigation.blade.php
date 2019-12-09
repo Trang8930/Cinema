@@ -22,9 +22,6 @@
 				<a href="#" class="nav-link">Rạp</a>
 			</li>
 			<li class="nav-item pl-3">
-				<a href="#" class="nav-link">Hỗ Trợ</a>
-			</li>
-			<li class="nav-item pl-3">
 				<a href="" class="nav-link">Liên Hệ</a>
 			</li>
 			<li class="nav-item pl-3">
