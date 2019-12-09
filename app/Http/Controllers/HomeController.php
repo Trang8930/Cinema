@@ -172,14 +172,12 @@ class HomeController extends Controller
     }
 
     // search phim
-    public function search(Request $request)
-    {
-        $search = $request->search;
-        $result = phim::where('tenphim', 'like', '%' . $search . '%')
-            ->orWhere('tentienganh', 'like', '%' . $search . '%')
-            ->get();
-        $review = tintuc::where('theloai', 1)->get();
-        $blog = tintuc::where('theloai', 0)->get();
-        return view('search', compact('result', 'review', 'blog', 'search'));
+    public function search(Request $request) {
+        //dd($request);
+        $result=phim::where('trangthai','1')
+                    ->where('tenphim', 'LIKE', "%{$request->search}%")
+                    ->orWhere('dienvien', 'LIKE', "%{$request->search}%")
+                    ->get();
+        return view('search',compact('result'));
     }
 }
