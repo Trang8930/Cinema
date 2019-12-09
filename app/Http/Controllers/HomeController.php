@@ -170,4 +170,13 @@ class HomeController extends Controller
 
         return redirect()->back();
     }
+
+    public function search(Request $request) {
+        //dd($request);
+        $result=phim::where('trangthai','1')
+                    ->where('tenphim', 'LIKE', "%{$request->key}%")
+                    ->orWhere('dienvien', 'LIKE', "%{$request->key}%")
+                    ->get();
+        return view('search',compact('result'));
+    }
 }

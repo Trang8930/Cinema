@@ -7,36 +7,41 @@
 				<div class="col-lg-12 mb-4">
 					<div class="card">
 						<div class="card-header">
-							<h6 class="text-uppercase mb-0">Quản Lý Combo</h6>
-							<a href="admin/addcombo" title="Thêm mới" style="position: absolute;right: 35px;top: 22px;"><i class="fas fa-plus-square text-success" style="font-size: 24px"></i></a>
+							<h6 class="text-uppercase mb-0">Quản Lý User</h6>
 						</div>
 						<div class="card-body">
 							<table class="table table-hover card-text">
 								<thead>
 									<tr>
 										<th>id</th>
-										<th>Tên Combo</th>
-										<th>Chi Tiết</th>
-										<th>Giá</th>
+										<th>Tên người dùng</th>
+										<th>Email</th>
+										<th>Level</th>
 										<th>Chức năng</th>
 									</tr>
 								</thead>
 								<tbody>
-									@foreach ($combo as $cb)
+									@foreach ($user as $p)
 									<tr>
-										<td>{{$cb->id}}</td>
-										<td>{{$cb->tencombo}}</td>
-										<td>{{$cb->chitiet}}</td>
-										<td>{{$cb->gia}}</td>
-										<td><a href="admin/suacombo/{{$cb->id}}"><button style="background-color: #ffffff00;border: none" title="Sửa"><i class="fas fa-edit text-success"></i></button></a>
-											<form action="admin/xoacombo/{{$cb->id}}" method="get" onsubmit="return confirm('Chắc chắn không ^_^')">
-												{{ csrf_field() }}
-												<button type="submit" style="background-color: #ffffff00;border: none" title="Xóa"><i class="fas fa-trash-alt text-danger"></i></button>
-											</form></td>
+										<td>{{$p->id}}</td>
+										<td>{{$p->name}}</td>
+										<td>{{$p->email}}</td>
+										<td>
+											@if($p->level == 0)
+												Người dùng
+											@else
+												Admin
+											@endif
+										</td>
+										<td><a href="admin/users/edit/{{$p->id}}"><button style="background-color: #ffffff00;border: none" title="Sửa"><i class="fas fa-edit text-success"></i></button></a>
+											<a href="admin/users/delete/{{$p->id}}" data-confirm="Are you sure to delete this item?"><i class="fas fa-trash-alt text-danger"></i></button>
+											</a></td>
+										</tr>
 										</tr>
 										@endforeach
 									</tbody>
 								</table>
+								{{ $user->links()}}
 							</div>
 						</div>
 					</div>

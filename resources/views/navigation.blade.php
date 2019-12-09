@@ -12,20 +12,26 @@
 					<a href="{{url('phimsapchieu')}}" class="dropdown-item">Phim sắp chiếu</a>
 				</div>
 			</li>
-			<li class="nav-item pl-5">
+			<li class="nav-item pl-3">
 				<a href="#" class="nav-link">Mua vé</a>
 			</li>
-			<li class="nav-item pl-5">
+			<li class="nav-item pl-3">
 				<a href="#" class="nav-link">Tin Tức</a>
 			</li>
-			<li class="nav-item pl-5">
+			<li class="nav-item pl-3">
 				<a href="#" class="nav-link">Rạp</a>
 			</li>
-			<li class="nav-item pl-5">
+			<li class="nav-item pl-3">
 				<a href="#" class="nav-link">Hỗ Trợ</a>
 			</li>
-			<li class="nav-item pl-5">
+			<li class="nav-item pl-3">
 				<a href="" class="nav-link">Liên Hệ</a>
+			</li>
+			<li class="nav-item pl-3">
+				<form action="/search" method="post">
+					{{ csrf_field() }}
+					<input name="key" placeholder="Tìm tên phim, diễn viên..." style="width:200px"> <input style="color:white" class="btn btn-success btn-sm" type="submit" value="Tìm Kiếm">
+				</form>
 			</li>
 		</ul>
 		@if (!Auth::check())
