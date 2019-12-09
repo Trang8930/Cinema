@@ -13,6 +13,8 @@ use App\combo;
 use App\User;
 use App\ve;
 use App\datcombo;
+use App\cmtphim;
+use App\cmttintuc;
 
 class AdminController extends Controller
 {
@@ -67,10 +69,38 @@ class AdminController extends Controller
 		$combo=combo::all();
 		return view('.admin.qlycombo',compact('combo'));
 	}
+
 	public function dsuser()
-	{	$user=User::paginate(10);
-		return view('.admin.qlyuser',compact('user'));
+	{	
+		$user=User::paginate(10);
+		return view('.admin.users.index',compact('user'));
 	}
+
+	public function getEditUser($id)
+	{	
+		$user = User::find($id);
+		return view('admin.users.edit',compact('user'));
+	}
+
+	public function postEditUser(Request $request, $id)
+	{	
+		$user = User::find($id);
+		$user->name = $request->name;
+		$user->level = $request->level;
+		$user->save();
+		return redirect('/admin/users')->with('message', 'Success!');
+	}
+
+	public function delUser(Request $request, $id)
+	{	
+		$user = User::find($id);
+		$ve = ve::where('id_user', $id)->delete();
+		$cmtphim = cmtphim::where('id_user', $id)->delete();
+		$cmttintuc = cmttintuc::where('id_user', $id)->delete();
+		$user->delete();
+		return redirect('/admin/users')->with('message', 'Success!');
+	}
+
 	public function dsve()
 	{
 		$ve=ve::paginate(10);

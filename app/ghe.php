@@ -19,6 +19,6 @@ class ghe extends Model
     }
     public function ve()
     {
-        return $this->hasOne('App\ve','id_ghe','id');
+        return $this->hasOne('App\ve','id_ghe','id')->withDefault();
     }
 }

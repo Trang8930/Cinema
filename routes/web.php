@@ -36,7 +36,12 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'], function() {
 	Route::get('qlyphong','AdminController@dsphong');
 	Route::get('qlyghe','AdminController@dsghe');
 	Route::get('qlycombo','AdminController@dscombo');
-	Route::get('qlyuser','AdminController@dsuser');
+
+	Route::get('users','AdminController@dsuser');
+	Route::get('users/edit/{id}','AdminController@getEditUser');
+	Route::post('users/edit/{id}','AdminController@postEditUser');
+	Route::get('users/delete/{id}','AdminController@delUser');
+
 	Route::get('qlyve','AdminController@dsve');
 	Route::get('addphim','AdminController@addphim');
 	Route::post('formaddphim','AdminController@addphimmoi');
@@ -92,6 +97,7 @@ Route::group(['prefix' => 'user','middleware' => 'auth'], function() {
 	Route::get('/','UserController@index');
 });
 
+Route::post('search', 'HomeController@search');
 
 Route::get('lienket', function() {
    // $lk=App\ve::where('id_lichchieu',1)->get();

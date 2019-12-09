@@ -15,7 +15,7 @@
 			@else
 			<div class="carousel-item">
 				@endif
-				<a href="{{$s->link}}"><img src="/anhda4/slide/{{$s->image}}" alt="" width="100%" height="500"></a>
+				<a href="#"><img src="/anhda4/slide/{{$s->image}}" alt="" width="100%" height="500"></a>
 			</div>
 			<?php $i++; ?>
 			@endforeach
