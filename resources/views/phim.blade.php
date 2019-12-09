@@ -4,7 +4,7 @@
 
 <div class="container mt-5">
 	<div class="row">
-		@foreach($phim as $p)			
+		@foreach($phim as $p)
 		<div class="col-xs-12 col-sm-8 col-md-8">
 			<div class="row">
 				<div class="col-xs-8 col-sm-4 col-md-4 image">
@@ -80,37 +80,39 @@
 									<h5>{{$l->rap->tenrap}}</h5>
 								</div>
 								<div class="chitietlich">
-										@foreach ($l['ngay'] as $n)
+									@foreach ($l['ngay'] as $n)
 									<span>
-											<strong>{{date('d-m-Y', strtotime($n->ngay))}}</strong>
-								
-										
+										<strong>{{date('d-m-Y', strtotime($n->ngay))}}</strong>
+
+
 									</span>
 									<ul>
 										@foreach ($n['id_phong'] as $p)
 										<div class="mb-4">
 											<span class="lichphong">{{$p->phong->tenphong}}</span>
-										
-										@foreach ($p['time'] as $t)
-											
-											<a href="datve/{{$t->id}}"><li>{{date('G:i',strtotime($t->time))}}</li></a>
+
+											@foreach ($p['time'] as $t)
+
+											<a href="datve/{{$t->id}}">
+												<li>{{date('G:i',strtotime($t->time))}}</li>
+											</a>
+											@endforeach
+										</div>
 										@endforeach
-											</div>
-									@endforeach
-										
-										
+
+
 									</ul>
-										@endforeach
+									@endforeach
 								</div>
 							</div>
 							@endforeach
-							
+
 						</div>
 						<div id="menu1" class="container tab-pane fade"><br>
 							<div class="cmt">
 								@foreach ($phim as $p)
 								<form action="cmt/{{$p->id}}" method="POST">
-								@endforeach
+									@endforeach
 									@csrf
 								<input type="text" class="form-control" name="noidungcmt">
 								<div style="text-align: right;">
@@ -118,9 +120,9 @@
 								</div>
 								</form>
 							</div>
-							<div >
+							<div>
 								@foreach ($cmtphim as $cmtp)
-									<div class="comment">
+								<div class="comment">
 									<!-- Comment Avatar -->
 									<div class="comment-avatar">
 										<img src="/anhda4/logo/avt.png">
@@ -144,15 +146,15 @@
 									</div>
 								</div>
 								@endforeach
-								
-						
+
+
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		
+
 		@endforeach
 		<div class="col-xs-12 col-sm-4 col-md-4">
 			<h3 class="phimlienquan">Phim Đang Chiếu</h3>
@@ -162,7 +164,8 @@
 					<div class="movie movielienquan">
 						<img src="/anhda4/phim/{{$plq->image}}" alt="image" width="100%">
 						<div class="decription-hover">
-							<a href="{{url('phim',$plq->id)}}"><button class="btn btn-outline-secondary">Xem chi tiết</button></a>
+							<a href="{{url('phim',$plq->id)}}"><button class="btn btn-outline-secondary">Xem chi
+									tiết</button></a>
 						</div>
 					</div>
 					<div class="title-plq">

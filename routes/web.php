@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\HomeController;
+
 Route::get('','HomeController@trangchu');
 
 Route::get('phim/{idphim}','HomeController@chitietphim')->where(['idphim'=>'[0-9]+']);
@@ -23,6 +25,7 @@ Route::get('datve/{id}','HomeController@chitietdatve');
 
 Route::get('review/{id}','HomeController@review');
 Route::get('blog/{id}','HomeController@blog');
+Route::get('search', 'HomeController@search')->name('search');
 
 Route::group(['prefix' => 'admin','middleware' => 'admin'], function() {
 	Route::get('/','AdminController@homeadmin');

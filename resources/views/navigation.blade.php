@@ -5,23 +5,32 @@
 	</button>
 	<div class="collapse navbar-collapse" id="menu">
 		<ul class="navbar-nav m-auto">
-			<li class="nav-item dropdown pl-5">
+			
+			<li class="nav-item dropdown pl-4">
 				<a href="/" class="nav-link dropdown-toggle" id="menu2" data-toggle="dropdown">Phim</a>
 				<div class="dropdown-menu">
 					<a href="{{url('phimdangchieu')}}" class="dropdown-item">Phim đang chiếu</a>
 					<a href="{{url('phimsapchieu')}}" class="dropdown-item">Phim sắp chiếu</a>
 				</div>
 			</li>
-			<li class="nav-item pl-3">
+
+			<li class="nav-item pl-4">
 				<a href="#" class="nav-link">Mua vé</a>
 			</li>
-			<li class="nav-item pl-3">
+			<li class="nav-item pl-4">
 				<a href="#" class="nav-link">Tin Tức</a>
 			</li>
-			<li class="nav-item pl-3">
+			<li class="nav-item pl-4">
 				<a href="#" class="nav-link">Rạp</a>
 			</li>
+<<<<<<< HEAD
 			<li class="nav-item pl-3">
+=======
+			<li class="nav-item pl-4">
+				<a href="#" class="nav-link">Hỗ Trợ</a>
+			</li>
+			<li class="nav-item pl-4">
+>>>>>>> origin
 				<a href="" class="nav-link">Liên Hệ</a>
 			</li>
 			<li class="nav-item pl-3">
@@ -33,7 +42,8 @@
 		</ul>
 		@if (!Auth::check())
 		<div class="dangki">
-			<a href="{{ url('dangnhap') }}">Đăng Nhập</a>&nbsp;<span class="text-white">|</span>&nbsp;<a href="{{ url('dangky') }}">Đăng Ký</a>
+			<a href="{{ url('dangnhap') }}">Đăng Nhập</a>&nbsp;<span class="text-white">|</span>&nbsp;<a
+				href="{{ url('dangky') }}">Đăng Ký</a>
 		</div>
 		@else
 		<div class="dropdown">
@@ -41,15 +51,15 @@
 			<div class="dropdown-menu">
 				<a class="dropdown-item" href="/user">Profile</a>
 				@if (Auth::user()->level==1)
-					<a class="dropdown-item" href="{{url('admin')}}">Admin Quản lý</a>
+				<a class="dropdown-item" href="{{url('admin')}}">Admin Quản lý</a>
 				@else
 
 				@endif
 				<a class="dropdown-item" href="{{url('dangxuat')}}">Log out</a>
-				
+
 			</div>
 		</div>
 		@endif
-		
+
 	</div>
 </nav>
