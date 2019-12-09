@@ -112,10 +112,9 @@
 								<form action="cmt/{{$p->id}}" method="POST">
 								@endforeach
 									@csrf
-								<textarea class="form-control" name="noidungcmt">
-								</textarea>
-								<div>
-									<button type="submit" class="btn btn-outline-primary float-right mt-3">Bình Luận</button>
+								<input type="text" class="form-control" name="noidungcmt">
+								<div style="text-align: right;">
+									<button type="submit" class="btn btn-outline-primary mt-3">Bình Luận</button>
 								</div>
 								</form>
 							</div>
