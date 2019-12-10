@@ -29,15 +29,15 @@ Route::get('search', 'HomeController@search')->name('search');
 
 Route::group(['prefix' => 'admin','middleware' => 'admin'], function() {
 	Route::get('/','AdminController@homeadmin');
-	Route::get('qlyphim','AdminController@Qlyphim');
-	Route::get('qlytintuc','AdminController@Qlytintuc');
-	Route::get('qlyrap','AdminController@Qlyrap');
-	Route::get('qlylichchieu','AdminController@lichchieu');
-	Route::get('qlyphong','AdminController@dsphong');
+	Route::get('qlyphim','AdminController@Qlyphim')->name('qlyphim');
+	Route::get('qlytintuc','AdminController@Qlytintuc')->name('qlytintuc');
+	Route::get('qlyrap','AdminController@Qlyrap')->name('qlyrap');
+	Route::get('qlylichchieu','AdminController@lichchieu')->name('qlylichchieu');
+	Route::get('qlyphong','AdminController@dsphong')->name('qlyphong');
 	Route::get('qlyghe','AdminController@dsghe');
-	Route::get('qlycombo','AdminController@dscombo');
+	Route::get('qlycombo','AdminController@dscombo')->name('qlycombo');
 
-	Route::get('users','AdminController@dsuser');
+	Route::get('users','AdminController@dsuser')->name('qlyuser');
 	Route::get('users/edit/{id}','AdminController@getEditUser');
 	Route::post('users/edit/{id}','AdminController@postEditUser');
 	Route::get('users/delete/{id}','AdminController@delUser');
