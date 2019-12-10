@@ -7,7 +7,7 @@
 				<div class="col-lg-12 mb-5">
 					<div class="card">
 						<div class="card-header">
-							<h3 class="h6 text-uppercase mb-0">Thêm Tin Tức</h3>
+							<h3 class="h6 text-uppercase mb-0">Cập nhật Tin Tức</h3>
 						</div>
 						<div class="card-body">
 							<form action="admin/suatintuc/{{$tintuc->id}}" method="POST" class="form-horizontal" enctype="multipart/form-data">
@@ -46,7 +46,7 @@
 								</div>
 								<div class="form-group row">       
 									<div class="col-md-9 m-auto">
-										<input type="submit" value="Cập nhật" class="btn btn-primary">
+										<input type="submit" value="Cập nhật" class="btn btn-primary" style="margin-left: 100%;">
 									</div>
 								</div>
 							</form>

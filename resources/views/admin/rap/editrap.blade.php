@@ -26,7 +26,7 @@
 								</div>
 								<div class="form-group row">
 									<div class="col-md-9 m-auto">
-										<input type="submit" value="Cập nhật" class="btn btn-primary">
+										<input type="submit" value="Cập nhật" class="btn btn-primary" style="margin-left: 100%;">
 									</div>
 								</div>
 							</form>
