@@ -30,6 +30,22 @@
 										</select>
 									</div>
 								</div>
+								<div class="form-group row">
+									<label class="col-md-3 form-control-label">Đến hàng</label>
+									<div class="col-md-9">
+										<select name="hang" class="form-control">
+											@foreach ($rows as $row)
+										<option value="{{$row->id}}">{{$row->name}}-{{$row->id}}</option>
+											@endforeach
+										</select>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-md-3 form-control-label">Số cột</label>
+									<div class="col-md-9">
+										<input type="number" name="cot" class="form-control">
+									</div>
+								</div>
 								<div class="form-group row">       
 										<div class="col-md-12 text-right">
 											<a href="{{route('qlyphong')}}" class="btn btn-danger">Hủy bỏ</a>

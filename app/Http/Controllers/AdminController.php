@@ -15,6 +15,7 @@ use App\ve;
 use App\datcombo;
 use App\cmtphim;
 use App\cmttintuc;
+use App\row;
 
 class AdminController extends Controller
 {
@@ -261,7 +262,8 @@ class AdminController extends Controller
 	public function formphong()
 	{
 		$rap = rap::all();
-		return view('.admin.phong.addphong', compact('rap'));
+		$rows = row::all();
+		return view('.admin.phong.addphong', compact('rap', 'rows'));
 	}
 	public function addphong(Request $request)
 	{
@@ -269,6 +271,22 @@ class AdminController extends Controller
 		$phong->tenphong=$request->tenphong;
 		$phong->id_rap=$request->rap_id;
 		$phong->save();
+		$id_phong = $phong->id;
+		$hang = $request->hang;
+		$cot = $request->cot;
+		// them ghe
+		
+		$arr = array();
+		for($i = 1; $i<= $hang; $i++ ) {
+			for($j = 1; $j <= $cot; $j++) {
+				$arr[] = array(
+					'id_phong'=> $id_phong,
+					'row'=> row::find($i)->name,
+					'number' => $j
+				);
+			}
+		}
+		ghe::insert($arr);
 		return redirect('admin/qlyphong');
 	}
 	public function xoaphong($id)
@@ -314,7 +332,7 @@ class AdminController extends Controller
 			</tr>";
 		}
 	}
-	public function showghe($id)
+	public function showghe02($id)
 	{
 		$ghe=ghe::where('id_phong',$id)->groupby('row')->distinct()->get();
 		for($i=0;$i<count($ghe);$i++){
@@ -332,6 +350,18 @@ class AdminController extends Controller
 			echo "<div id='".$n->id."' class='seatNumber' value='".$n->row."".$n->number."'>".$n->number."</div>";
 			}
 			"</div></div>";
+		}
+	}
+	public function showghe($id) {
+		$rows = ghe::where('id_phong',$id)->distinct('row')->count('row');
+		$cols = ghe::where('id_phong',$id)->distinct('number')->count('number');
+		for($i = 1; $i <= $rows; $i++) {
+			echo "<div class='seat-row'>".row::where('id', $i)->first()->name."</div><div><div/>";
+			for($j=1; $j <= $cols; $j++) {
+				echo "<div class='seatNumber seat-number'>";
+				echo $j;
+				echo "</div>";
+			}
 		}
 	}
 
