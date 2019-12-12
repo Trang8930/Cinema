@@ -31,3 +31,18 @@
     background-color: lightgreen;
     color: black;
 }
+.seat-row {
+    display: inline-block;
+    margin-right: 10px;
+}
+.seat-number {
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    color: #fff;
+    background: #5c86eb;
+    border-radius: 5px;
+}
+#dsghe {
+    text-align: center;
+}

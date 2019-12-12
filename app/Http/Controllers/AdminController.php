@@ -356,12 +356,13 @@ class AdminController extends Controller
 		$rows = ghe::where('id_phong',$id)->distinct('row')->count('row');
 		$cols = ghe::where('id_phong',$id)->distinct('number')->count('number');
 		for($i = 1; $i <= $rows; $i++) {
-			echo "<div class='seat-row'>".row::where('id', $i)->first()->name."</div><div><div/>";
+			echo "<span class='seat-row'>".row::where('id', $i)->first()->name."</span>";
 			for($j=1; $j <= $cols; $j++) {
-				echo "<div class='seatNumber seat-number'>";
+				echo "<span class='seat-number'>";
 				echo $j;
-				echo "</div>";
+				echo "</span>";
 			}
+			echo '<br/>';
 		}
 	}
 

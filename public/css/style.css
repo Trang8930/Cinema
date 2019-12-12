@@ -495,5 +495,14 @@ body {
     border-radius: 5px;
     outline: none;
 }
+.seat-row {
+  display: inline;
+  margin-right: 10px;
+}
+.seat-number {
 
+}
+#dsghe {
+  text-align: center;
+}
 
