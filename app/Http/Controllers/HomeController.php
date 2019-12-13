@@ -180,4 +180,10 @@ class HomeController extends Controller
                     ->get();
         return view('search',compact('result'));
     }
+
+    public function getTintuc() {
+        $tintuc = tintuc::select()->where('theloai',0)->orderBy('id','desc')->paginate(5);
+        $phimdc = phim::where('trangthai', '1')->orderBy('id', 'desc')->limit(3)->get();
+        return view('tintuc', compact('tintuc', 'phimdc'));
+    }
 }

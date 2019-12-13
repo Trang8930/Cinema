@@ -18,7 +18,7 @@ class CreateGheTable extends Migration
             $table->collation = 'utf8_unicode_ci';
             $table->bigIncrements('id');
             $table->bigInteger('id_phong')->unsigned();
-            $table->foreign('id_phong')->references('id')->on('phong');
+            $table->foreign('id_phong')->references('id')->on('phong')->onDelete('cascade');
             $table->string('hangghe');
             $table->timestamps();
         });

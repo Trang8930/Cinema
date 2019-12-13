@@ -240,12 +240,28 @@ class AdminController extends Controller
 		$phim=phim::where('trangthai','1')->get();
 		$rap=rap::all();
 		$lich=lichchieu::find($idlc);
-		return view('.admin.lichchieu.editlichchieu',compact('lich','phim','rap'));
+		return view('.admin.lichchieu.editlichchieu',compact('lich','phim','rap','idlc'));
 	}
 
-	public function sualich()
+	public function sualich(Request $request)
 	{
-		
+		$arr_c = [
+			'id' => $request->id,
+			'id_phim' => $request->phim,
+			'id_rap' => $request->rap,
+			'id_phong' => $request->phong,
+		];
+		$arr_v = [
+			'ngay' => $request->ngay,
+			'time' => $request->time
+		];
+		$result = lichchieu::where($arr_c)->update($arr_v);
+		if($result) {
+			return redirect()->route('qlylichchieu');
+		} else {
+			return redirect()->route('formsualich', $request->id);
+		}
+		//dd($arr);
 	}
 	public function xoalichchieu($id)
 	{

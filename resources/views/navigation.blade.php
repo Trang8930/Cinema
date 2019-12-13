@@ -18,10 +18,7 @@
 				<a href="#" class="nav-link">Mua vé</a>
 			</li>
 			<li class="nav-item pl-4">
-				<a href="#" class="nav-link">Tin Tức</a>
-			</li>
-			<li class="nav-item pl-4">
-				<a href="#" class="nav-link">Rạp</a>
+			<a href="{{route('tinTuc')}}" class="nav-link">Tin Tức</a>
 			</li>
 			<li class="nav-item pl-3">
 				<a href="" class="nav-link">Liên Hệ</a>

@@ -499,10 +499,28 @@ body {
   display: inline;
   margin-right: 10px;
 }
-.seat-number {
 
-}
 #dsghe {
   text-align: center;
 }
+.item-thumb {
+  width: 280px;
+}
+.item-thumb a {
+  display: block;
+}
+.loading-img {
+  width: 100%;
+}
 
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+.content {
+  width: 523px;
+}
+.movieofmonth {
+  margin: 30px 0;
+}

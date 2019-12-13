@@ -10,9 +10,9 @@
 							<h3 class="h6 text-uppercase mb-0">Sửa Lịch</h3>
 						</div>
 						<div class="card-body">
-							<form action="{{url('admin/addlich')}}" method="POST" class="form-horizontal">
+							<form action="{{url('admin/sualich')}}" method="POST" class="form-horizontal">
 								{{ csrf_field() }}
-								
+							<input type="hidden" name="id" value="{{$idlc}}">
 								<div class="form-group row">
 									<label class="col-md-3 form-control-label">Phim</label>
 									<div class="col-md-9">
@@ -59,7 +59,7 @@
 								<div class="form-group row">       
 										<div class="col-md-12 text-right">
 											<a href="{{route('qlylichchieu')}}" class="btn btn-danger">Hủy bỏ</a>
-										<input type="submit" value="Thêm mới" class="btn btn-primary">
+										<input type="submit" value="Cập nhật" class="btn btn-primary">
 									</div>
 								</div>
 							</form>

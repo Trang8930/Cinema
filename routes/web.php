@@ -63,8 +63,8 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'], function() {
 
 	Route::get('addlichchieu','AdminController@formlich');
 	Route::post('addlich','AdminController@addlich');
-	Route::get('sualichchieu/{idlc}','AdminController@formsualich');
-	Route::post('sualich/{idlc}','AdminController@sualich');
+	Route::get('sualichchieu/{idlc}','AdminController@formsualich')->name('formsualich');
+	Route::post('sualich','AdminController@sualich');
 	Route::get('xoalich/{id}','AdminController@xoalichchieu');
 
 	Route::get('addphong','AdminController@formphong');
@@ -109,3 +109,4 @@ Route::get('lienket', function() {
    return $lich;
 });
 Route::get('themghe', 'HomeController@themghe');
+Route::get('tin-tuc', 'HomeController@getTintuc')->name('tinTuc');
