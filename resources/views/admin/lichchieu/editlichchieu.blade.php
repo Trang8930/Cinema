@@ -12,53 +12,53 @@
 						<div class="card-body">
 							<form action="{{url('admin/sualich')}}" method="POST" class="form-horizontal">
 								{{ csrf_field() }}
-							<input type="hidden" name="id" value="{{$idlc}}">
+								<input type="hidden" name="id" value="{{$chitietlich->id}}">
 								<div class="form-group row">
 									<label class="col-md-3 form-control-label">Phim</label>
 									<div class="col-md-9">
-										<select name="phim" class="form-control">
-											@foreach ($phim as $p)
-												<option value="{{$p->id}}" <?=($lich->phim->id == $p->id) ? 'selected' : ''?>>
-												{{$p->tenphim}}
-												</option>
-											@endforeach
-										</select>
+										<input name="phim" class="form-control" value="{{$chitietlich->tenphim}}" disabled/>
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="col-md-3 form-control-label">Rạp</label>
 									<div class="col-md-9">
-										<select name="rap" class="form-control" id="rap">
-											<option checked></option>
-											@foreach ($rap as $r)
-												<option value="{{$r->id}}">{{$r->tenrap}}</option>
-											@endforeach
-										</select>
+										<input name="rap" class="form-control" value="{{$chitietlich->tenrap}}" disabled/>
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="col-md-3 form-control-label">Phòng</label>
 									<div class="col-md-9">
-										<select name="phong" class="form-control" id="phong">
-											
+										<select name="phong" class="form-control">
+											@foreach ($ds_phong as $p)
+											<option value="{{$p->id}}" 
+												<?php
+													if($p->id == $chitietlich->id_phong) {
+														echo 'selected';
+													}
+												?>>
+												{{$p->tenphong}}
+											</option>
+											@endforeach
 										</select>
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-3 form-control-label">Ngày</label>
 									<div class="col-md-9">
-										<input value="{{$lich->ngay}}" name="ngay" type="date"  class="form-control form-control-warning">
+										<input value="{{$chitietlich->ngay}}" name="ngay" type="date"
+											class="form-control form-control-warning">
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-3 form-control-label">Thời gian</label>
 									<div class="col-md-9">
-										<input value="{{$lich->time}}" name="time" type="time"  class="form-control ">
+										<input value="{{$chitietlich->time}}" name="time" type="time"
+											class="form-control ">
 									</div>
 								</div>
-								<div class="form-group row">       
-										<div class="col-md-12 text-right">
-											<a href="{{route('qlylichchieu')}}" class="btn btn-danger">Hủy bỏ</a>
+								<div class="form-group row">
+									<div class="col-md-12 text-right">
+										<a href="{{route('qlylichchieu')}}" class="btn btn-danger">Hủy bỏ</a>
 										<input type="submit" value="Cập nhật" class="btn btn-primary">
 									</div>
 								</div>
@@ -71,6 +71,6 @@
 	</div>
 </div>
 <script type="text/javascript">
-	
+
 </script>
 @endsection

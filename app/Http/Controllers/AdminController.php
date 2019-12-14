@@ -16,6 +16,7 @@ use App\datcombo;
 use App\cmtphim;
 use App\cmttintuc;
 use App\row;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -237,21 +238,27 @@ class AdminController extends Controller
 
 	public function formsualich($idlc)
 	{
-		$phim=phim::where('trangthai','1')->get();
-		$rap=rap::all();
-		$lich=lichchieu::find($idlc);
-		return view('.admin.lichchieu.editlichchieu',compact('lich','phim','rap','idlc'));
+		$chitietlich = DB::table('lichchieu as l')
+						->select('l.id', 'tenphim', 'tenrap', 'tenphong','ngay', 'time', 'l.id_rap', 'l.id_phong')
+						->join('phim as p','l.id_phim', '=', 'p.id')
+						->join('rap as r', 'l.id_rap', '=', 'r.id')
+						->join('phong as ph', 'l.id_phong', '=', 'ph.id')
+						->where('l.id', $idlc)
+						->first();
+		$id_rap = $chitietlich->id_rap;
+		$ds_phong = phong::where('id_rap', $id_rap)->get();
+		//dd($ds_phong);
+						//dd($chitietlich);
+		return view('.admin.lichchieu.editlichchieu',compact('chitietlich','ds_phong'));
 	}
 
 	public function sualich(Request $request)
 	{
 		$arr_c = [
 			'id' => $request->id,
-			'id_phim' => $request->phim,
-			'id_rap' => $request->rap,
-			'id_phong' => $request->phong,
 		];
 		$arr_v = [
+			'id_phong' => $request->phong,
 			'ngay' => $request->ngay,
 			'time' => $request->time
 		];
