@@ -60,33 +60,20 @@
             <div class="card-body">
               <table class="table">
                 <tr>
-                  <th>STT</th>
+                  <th>ID Phim</th>
                   <th>Tên Phim</th>
                   <th>SL vé đã bán</th>
                 </tr>
-                @php
-                  $stt=0;
-                  if (isset($_GET['page'])) {
-                    $a=$_GET['page'];
-                  }
-                  else{
-                    $a=1;
-                  }
-                  $stt=($a-1)*10;
-                  @endphp
-                @foreach ($lichchieu as $l)
-                @php
-                  $stt++;
-                  @endphp  
+                @foreach ($veban as $ve)
                 <tr>
-                  <td>{{$stt}}</td>
-                  <td>{{$l->phim->tenphim}}</td>
-                  <td>{{$l->id_rap}}</td>
+                  <td>{{$ve->id_phim}}</td>
+                  <td>{{$ve->tenphim}}</td>
+                  <td>{{$ve->sl}}</td>
                 </tr>
                 @endforeach
                 
               </table>
-              {{ $lichchieu->links()}}
+              {{$veban->links()}}
             </div>
           </div>
         </div>

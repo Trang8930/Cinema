@@ -11,7 +11,7 @@
           </div>
           @foreach ($phim as $up)
           <div class="card-body">
-            <form action="admin/formeditphim/{{$up->id}}" method="POST" class="form-horizontal">
+            <form action="admin/formeditphim/{{$up->id}}" method="POST" class="form-horizontal" enctype="multipart/form-data">
               {{ csrf_field() }}
              {{--  <input type="hidden" name="_token" value="{{ csrf_token() }} ?>"> --}}
               <div class="form-group row">

@@ -128,8 +128,14 @@ class HomeController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->pass);
-        $user->save();
-        return redirect('/');
+        $user->level = 0;
+        $result = $user->save();
+        if($result) {
+            return redirect('/');
+        }else {
+            return view('/dangky');
+        }
+        
     }
     public function dangxuat()
     {

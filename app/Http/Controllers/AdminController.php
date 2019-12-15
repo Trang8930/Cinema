@@ -25,15 +25,16 @@ class AdminController extends Controller
 		$phimdc=phim::where('trangthai','1')->count();
 		$phimsc=phim::where('trangthai','0')->count();
 		$tintuc=tintuc::count();
-		$thanhvien=user::where('level',0)->count();
-
-		$lichchieu=lichchieu::groupby('id_phim')->distinct()->paginate(10);
-		for ($i=0; $i < count($lichchieu) ; $i++) { 
-			$ve=ve::where([['id_lichchieu',$lichchieu[$i]->id],['id_user','<>','NULL']])->count();
-			$lichchieu[$i]['id_rap']=$ve;
-		}
-		//print($lichchieu);
-		return view('.admin.homeadmin',compact('phimdc','phimsc','tintuc','thanhvien','lichchieu'));
+		$thanhvien=user::count();
+		$veban = DB::table('phim as p')
+				->select('p.id as id_phim', 'tenphim', DB::raw('count(v.id_ghe) as sl'))
+				->leftJoin('lichchieu as l', 'p.id', '=', 'l.id_phim')
+				->leftJoin('ve as v', 'l.id', '=', 'v.id_lichchieu')
+				->groupBy('p.id')
+				->orderBy('id_phim', 'asc')
+				->paginate(10);
+		//dd($veban);
+		return view('.admin.homeadmin',compact('phimdc','phimsc','tintuc','thanhvien', 'veban'));
 	}
 	public function Qlyphim()
 	{
@@ -118,7 +119,14 @@ class AdminController extends Controller
 		$phim = new phim;
 		$phim->tenphim=$request->tenphim;
 		$phim->tentienganh=$request->tenta;
-		$phim->image=$request->anhphim;
+		//$phim->image=$request->anhphim;
+		if ($request->hasFile('anhphim')) {
+			$image = $request->file('anhphim');
+			$name = time().'.'.$image->getClientOriginalExtension();
+			$destinationPath = public_path('/anhda4/phim');
+			$image->move($destinationPath, $name);
+			$phim->image=$name;
+		}
 		$phim->nsx=$request->nhasx;
 		$phim->theloai=$request->theloai;
 		$phim->quocgia=$request->quocgia;
@@ -141,22 +149,29 @@ class AdminController extends Controller
 	}
 	public function validationphim(Request $request,$id)
 	{
-		$phim=phim::where('id',$id)->update([
-			'tenphim'=>$request->tenphim,
-			'tentienganh'=>$request->tenta,
-			'image'=>$request->anhphim,
-			'nsx'=>$request->nhasx,
-			'theloai'=>$request->theloai,
-			'quocgia'=>$request->quocgia,
-			'daodien'=>$request->daodien,
-			'dienvien'=>$request->dienvien,
-			'thoiluong'=>$request->thoiluong,
-			'ngaykhoichieu'=>$request->nkc,
-			'trangthai'=>$request->radio,
-			'trailer'=>$request->trailer,
-			'noidung'=>$request->nd,
-			'giave'=>$request->giave
-		]);
+		$phim=phim::find($id);
+		$phim->tenphim=$request->tenphim;
+		$phim->tentienganh=$request->tenta;
+		if ($request->hasFile('anhphim')) {
+			$image = $request->file('anhphim');
+			$name = time().'.'.$image->getClientOriginalExtension();
+			$destinationPath = public_path('/anhda4/phim');
+			$image->move($destinationPath, $name);
+			$phim->image=$name;
+		}
+		$phim->nsx=$request->nhasx;
+		$phim->theloai=$request->theloai;
+		$phim->quocgia=$request->quocgia;
+		$phim->daodien=$request->daodien;
+		$phim->dienvien=$request->dienvien;
+		$phim->thoiluong=$request->thoiluong;
+		$phim->ngaykhoichieu=$request->nkc;
+		$phim->trangthai=$request->radio;
+		$phim->trailer=$request->trailer;
+		$phim->noidung=$request->nd;
+		$phim->giave=$request->giave;
+		$phim->save();
+
 		return redirect()->back()->with('thongbao','Đã Sửa Thành Công ^_^');
 	}
 	public function xoap($idphim)

@@ -10,7 +10,7 @@
 							<h3 class="h6 text-uppercase mb-0">Thêm Phim Mới</h3>
 						</div>
 						<div class="card-body">
-							<form action="{{url('admin/formaddphim')}}" method="POST" class="form-horizontal">
+							<form action="{{url('admin/formaddphim')}}" method="POST" class="form-horizontal" enctype="multipart/form-data">
 								{{ csrf_field() }}
 								{{-- <input type="hidden" name="_token" value="{{ csrf_token() }} ?>"> --}}
 								<div class="form-group row">
