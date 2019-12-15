@@ -21,7 +21,7 @@ Route::get('phimdangchieu','HomeController@phimdangchieu');
 
 Route::get('phimsapchieu','HomeController@phimsapchieu');
 
-Route::get('datve/{id}','HomeController@chitietdatve');
+Route::get('datve/{id}','HomeController@chitietdatve')->name('datve');
 
 Route::get('review/{id}','HomeController@review');
 Route::get('blog/{id}','HomeController@blog');
@@ -83,6 +83,8 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'], function() {
 Route::get('ajax/ghe/{id}','AdminController@showghe');
 Route::get('ajax/lichchieu/{id}','AdminController@getlich');
 Route::get('ajax/phong/{id}','AdminController@getphong');
+Route::get('ajax/rap/{idphim}', 'HomeController@getRapTheoPhim');
+Route::get('ajax/xem-phong/{idphim}/{idrap}', 'HomeController@getPhongTheoPhimRap');
 Route::get('dangnhap','HomeController@formdangnhap');
 Route::post('login','Controller@dangnhap');
 Route::get('dangky','Controller@getdangky');
@@ -110,3 +112,4 @@ Route::get('lienket', function() {
 });
 Route::get('themghe', 'HomeController@themghe');
 Route::get('tin-tuc', 'HomeController@getTintuc')->name('tinTuc');
+Route::get('mua-ve', 'HomeController@muaVe')->name('muave');

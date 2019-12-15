@@ -15,7 +15,7 @@
 			</li>
 
 			<li class="nav-item pl-4">
-				<a href="#" class="nav-link">Mua vé</a>
+			<a href="{{route('muave')}}" class="nav-link">Mua vé</a>
 			</li>
 			<li class="nav-item pl-4">
 			<a href="{{route('tinTuc')}}" class="nav-link">Tin Tức</a>

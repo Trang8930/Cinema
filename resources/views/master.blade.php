@@ -17,5 +17,6 @@
 
 	@show
 	@include('footer')
+	@yield('scr')
 </body>
 </html>

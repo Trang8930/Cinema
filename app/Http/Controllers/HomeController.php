@@ -20,6 +20,7 @@ use App\rap;
 use App\datcombo;
 use App\tintuc;
 use Illuminate\Support\collection;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -28,8 +29,8 @@ class HomeController extends Controller
         $slide = slide::limit(3)->get();
         $phimdc = phim::where('trangthai', '1')->limit(4)->get();
         $phimsc = phim::where('trangthai', '0')->limit(4)->get();
-        $review = tintuc::where('theloai', 1)->get();
-        $blog = tintuc::where('theloai', 0)->get();
+        $review = tintuc::where('theloai', 1)->orderBy('id', 'desc')->limit(4)->get();
+        $blog = tintuc::where('theloai', 0)->orderBy('id', 'desc')->limit(4)->get();
         return view('trangchu', compact('slide', 'phimdc', 'phimsc', 'review', 'blog'));
     }
     public function chitietphim($idphim)
@@ -172,18 +173,78 @@ class HomeController extends Controller
     }
 
     // search phim
-    public function search(Request $request) {
+    public function search(Request $request)
+    {
         //dd($request);
-        $result=phim::where('trangthai','1')
-                    ->where('tenphim', 'LIKE', "%{$request->search}%")
-                    ->orWhere('dienvien', 'LIKE', "%{$request->search}%")
-                    ->get();
-        return view('search',compact('result'));
+        $result = phim::where('trangthai', '1')
+            ->where('tenphim', 'LIKE', "%{$request->search}%")
+            ->orWhere('dienvien', 'LIKE', "%{$request->search}%")
+            ->get();
+        return view('search', compact('result'));
     }
 
-    public function getTintuc() {
-        $tintuc = tintuc::select()->where('theloai',0)->orderBy('id','desc')->paginate(5);
+    public function getTintuc()
+    {
+        $tintuc = tintuc::select()->where('theloai', 0)->orderBy('id', 'desc')->paginate(5);
         $phimdc = phim::where('trangthai', '1')->orderBy('id', 'desc')->limit(3)->get();
         return view('tintuc', compact('tintuc', 'phimdc'));
+    }
+    public function muaVe()
+    {
+        $phimdc = phim::select('id', 'tenphim', 'tentienganh', 'image')->where('trangthai', '1')->get();
+        //dd($phimdc);
+        return view('muaVe', compact('phimdc'));
+    }
+
+    public function getRapTheoPhim($idPhim)
+    {
+        $dsrap = DB::table('lichchieu as l')
+            ->select('l.id_rap', 'tenrap')
+            ->join('rap as r', 'l.id_rap', '=', 'r.id')
+            ->where('l.id_phim', $idPhim)
+            ->groupBy('l.id_rap')
+            ->get();
+        //dd($dsrap);
+        echo "<li style='display: none;' idphim='$idPhim' id='idPhim'>&nbsp;</li>";
+        foreach ($dsrap as $rap) {
+            echo "<li class='item-rap' idrap='$rap->id_rap'>";
+            echo $rap->tenrap;
+            echo "</li>";
+        }
+    }
+
+    public function getPhongTheoPhimRap($idPhim, $idRap)
+    {
+        $dsNgay = lichchieu::select('ngay')
+            ->where('id_phim', $idPhim)
+            ->where('id_rap', $idRap)
+            ->orderBy('ngay', 'asc')
+            ->groupBy('ngay')
+            ->get();
+        foreach ($dsNgay as $ngay) {
+            echo "<li class='item-ngay'>" . "<p>".date('d-m-Y', strtotime($ngay->ngay))."</p>";
+            $dsPhongTheoNgay = DB::table('lichchieu as l')
+                ->select('l.id_phong', 'tenphong')
+                ->join('phong as p', 'l.id_phong', '=', 'p.id')
+                ->where('l.id_phim', $idPhim)
+                ->where('l.id_rap', $idRap)
+                ->where('ngay', $ngay->ngay)
+                ->groupBy('id_phong')
+                ->get();
+            foreach ($dsPhongTheoNgay as $phong) {
+                echo "<div><p class='ten-phong'>" . $phong->tenphong . "</p></div>";
+                $dsGioTheoPhong = lichchieu::select('id', 'time')
+                    ->where('id_phim', $idPhim)
+                    ->where('id_rap', $idRap)
+                    ->where('id_phong', $phong->id_phong)
+                    ->where('ngay', $ngay->ngay)
+                    ->orderBy('time', 'asc')
+                    ->get();
+                foreach ($dsGioTheoPhong as $gio) {
+                    echo "<a href='/datve/$gio->id' class='gio'>" . date('G:i',strtotime($gio->time)). "</a>";
+                }
+            }
+            echo "</li>";
+        }
     }
 }

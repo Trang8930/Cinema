@@ -342,7 +342,7 @@ body
 }
 .emptyBox::before
 {
-  content="";
+  content:"";
   box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
     background-color:#ccc;
 }
@@ -523,4 +523,66 @@ body {
 }
 .movieofmonth {
   margin: 30px 0;
+}
+h4.panel-title {
+  font-size: 16px;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0;
+  padding: 10px 0;
+}
+.panel-default > .panel-heading {
+  border-radius: 0;
+  color: #ffffff;
+  background-color: #f26b38;
+  border-color: #f26b38;
+  line-height: 20px;
+  text-align: center;
+}
+.show-img {
+  width: 60px;
+  margin-right: 10px;
+}
+.show-img img {
+  width: 100%;
+}
+.show-name {
+  width: 290px;
+}
+li {
+  list-style: none;
+}
+
+.item-phim, .item-rap, .item-ngay {
+  padding: 20px 15px;
+  border: 1px solid #ddd;
+  border-top: none;
+  cursor: pointer;
+}
+.item-rap:hover, .item-phim {
+  opacity: 0.7;
+}
+.ten-phong {
+  border: 1px solid;
+  padding: 5px 7px;
+  background-color: #f26a38;
+  color: #fff;
+  margin-right: 20px;
+  display: inline-block;
+}
+.gio {
+  margin: 0 10px 10px 0;
+  padding: 5px 10px;
+  border: 1px solid #ced0da;
+  color: #43464b;
+  display: inline-block;
+}
+.gio:hover {
+  text-decoration: none;
+  border: 1px solid #f26b38;
+  color: #f26b38;
+}
+.active {
+  color: #f26b38;
 }
