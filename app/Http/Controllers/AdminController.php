@@ -286,7 +286,7 @@ class AdminController extends Controller
 	}
 	public function xoalichchieu($id)
 	{
-		lichchieu::where('id',$id)->de;
+		lichchieu::where('id',$id)->delete();
 		return redirect('admin/qlylichchieu');
 	}
 
