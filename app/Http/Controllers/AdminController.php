@@ -171,8 +171,7 @@ class AdminController extends Controller
 		$phim->noidung=$request->nd;
 		$phim->giave=$request->giave;
 		$phim->save();
-
-		return redirect()->back()->with('thongbao','Đã Sửa Thành Công ^_^');
+		return redirect()->route('qlyphim');
 	}
 	public function xoap($idphim)
 	{
