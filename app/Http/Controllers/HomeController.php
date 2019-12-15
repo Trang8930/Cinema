@@ -27,8 +27,8 @@ class HomeController extends Controller
     public function trangchu()
     {
         $slide = slide::limit(3)->get();
-        $phimdc = phim::where('trangthai', '1')->limit(4)->get();
-        $phimsc = phim::where('trangthai', '0')->limit(4)->get();
+        $phimdc = phim::where('trangthai', '1')->orderBy('id','desc')->limit(4)->get();
+        $phimsc = phim::where('trangthai', '0')->orderBy('id','desc')->limit(4)->get();
         $review = tintuc::where('theloai', 1)->orderBy('id', 'desc')->limit(4)->get();
         $blog = tintuc::where('theloai', 0)->orderBy('id', 'desc')->limit(4)->get();
         return view('trangchu', compact('slide', 'phimdc', 'phimsc', 'review', 'blog'));
@@ -98,12 +98,12 @@ class HomeController extends Controller
 
     public function phimdangchieu()
     {
-        $phimdc = phim::where('trangthai', '1')->get();
+        $phimdc = phim::where('trangthai', '1')->orderBy('id', 'desc')->get();
         return view('phimdangchieu', compact('phimdc'));
     }
     public function phimsapchieu()
     {
-        $phimsc = phim::where('trangthai', '0')->get();
+        $phimsc = phim::where('trangthai', '0')->orderBy('id', 'desc')->get();
         return view('phimsapchieu', compact('phimsc'));
     }
     public function formdangnhap()
