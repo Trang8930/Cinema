@@ -53,7 +53,14 @@ class AdminController extends Controller
 	}
 	public function lichchieu()
 	{
-		$lich=lichchieu::paginate(10);
+		//$lich=lichchieu::paginate(10);
+		//dd($lich);
+		$lich = DB::table('lichchieu as l')->select('l.id', 'tenphim', 'tenrap', 'tenphong', 'ngay', 'time')
+					->join('rap as r', 'l.id_rap', '=', 'r.id')
+					->join('phong as p', 'l.id_phong', '=', 'p.id')
+					->join('phim as ph', 'l.id_phim', '=', 'ph.id')
+					->paginate(10);
+				
 		$phim=phim::where('trangthai',2)->get();
 		return view('.admin.qlylichchieu',compact('lich','phim'));
 	}
