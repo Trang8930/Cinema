@@ -67,18 +67,18 @@ class HomeController extends Controller
 
     public function chitietdatve($id)
     {
-        $lichchieu = lichchieu::where('id', $id)->get();
+        $lichchieu = lichchieu::where('id', $id)->first();
         $cb = combo::all();
-        foreach ($lichchieu as $lc) {
-            $idp = $lc->id_phong;
-        }
-        // $datghe=datghe::where('id_lichchieu',$id)->get();
+        $idp = $lichchieu->id_phong;
         $ghe = ghe::where('id_phong', $idp)->groupby('row')->distinct()->get();
+        //dd($cot);
+        //dd($ghe);
         for ($i = 0; $i < count($ghe); $i++) {
-            $g = ghe::where([['id_phong', 1], ['row', $ghe[$i]->row]])->get();
+            $g = ghe::where([['id_phong', $lichchieu->id_phong], ['row', $ghe[$i]->row]])->get();
 
             $ghe[$i]['number'] = $g;
         }
+        //dd($ghe);
 
         $ve = ve::where('id_lichchieu', $id)->get();
         return view('datve', compact('lichchieu', 'cb', 'ghe', 've'));

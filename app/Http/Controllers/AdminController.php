@@ -59,6 +59,7 @@ class AdminController extends Controller
 					->join('rap as r', 'l.id_rap', '=', 'r.id')
 					->join('phong as p', 'l.id_phong', '=', 'p.id')
 					->join('phim as ph', 'l.id_phim', '=', 'ph.id')
+					->orderBy('l.id', 'desc')
 					->paginate(10);
 				
 		$phim=phim::where('trangthai',2)->get();

@@ -2,15 +2,14 @@
 @section('content')
 @php
 $idl=null;
-foreach ($lichchieu as $lc) 
-	$idl=$lc->id
+$idl=$lichchieu->id
 
 @endphp
 <div class="container">
 	<div class="row">
 		<div class="col-sm-9" style="background-color: #f26b38;margin-top: 50px">
 			<div style="position: relative;">
-				<div class="booking" >
+				<div class="booking">
 					<table class="table mt-3">
 						<thead class="thead-dark">
 							<tr>
@@ -23,14 +22,15 @@ foreach ($lichchieu as $lc)
 						<tbody>
 							<tr style="background-color: #f9f9f9">
 								<td>
-									@foreach ($lichchieu as $l)
-									<span>{{$l->phim->tenphim}}</span>
-									@endforeach
-									
+									<span>{{$lichchieu->phim->tenphim}}</span>
+
 								</td>
-								<td><div>
-									<input class="slve" type="number" id="Numseats" style="width: 50px;" value="0" min="0" onchange="tienve()">
-								</div></td>
+								<td>
+									<div>
+										<input class="slve" type="number" id="Numseats" style="width: 50px;" value="0"
+											min="0" onchange="tienve()">
+									</div>
+								</td>
 								<td id="giave">50000</td>
 								<td><span class="tongtienve"></span>&nbsp;vnđ</td>
 							</tr>
@@ -53,11 +53,14 @@ foreach ($lichchieu as $lc)
 									<span id="tencb">{{$c->tencombo}}</span><br>
 									<span style="font-size: 14px;">{{$c->chitiet}}</span>
 								</td>
-								<td><div>
+								<td>
+									<div>
 
-									<input class="units-class combo" type="number" id="{{$c->tencombo}}-{{$c->id}}" style="width: 50px;" value="0" min="0" onchange="calculate()">
+										<input class="units-class combo" type="number" id="{{$c->tencombo}}-{{$c->id}}"
+											style="width: 50px;" value="0" min="0" onchange="calculate()">
 
-								</div></td>
+									</div>
+								</td>
 								<td>{{number_format($c->gia)}}</td>
 								<td><span class="subtotal-class"></span>&nbsp;vnđ</td>
 							</tr>
@@ -88,11 +91,11 @@ foreach ($lichchieu as $lc)
 										{{$g->row}}
 									</div>
 									@foreach ($g['number'] as $n)
-									@if (($n->ve->id_lichchieu== $idl ) && ($n->ve->id_user !=null))
-									<div id="{{$n->id}}" class="seatNumber seatDisable" value="{{$n->row}}{{$n->number}}">{{$n->number}}</div>
-									@else
-									<div id="{{$n->id}}" class="seatNumber" value="{{$n->row}}{{$n->number}}">{{$n->number}}</div>
-									@endif
+										@if (($n->ve->id_lichchieu== $idl ) && ($n->ve->id_user !=null))
+											<div id="{{$n->id}}" class="seatNumber seatDisable" value="{{$n->row}}{{$n->number}}">{{$n->number}}</div>
+										@else
+											<div id="{{$n->id}}" class="seatNumber" value="{{$n->row}}{{$n->number}}">{{$n->number}}</div>
+										@endif
 									@endforeach
 								</div>
 								@endforeach
@@ -102,33 +105,37 @@ foreach ($lichchieu as $lc)
 							</div>
 						</center>
 					</div>
-					<br/><br/>
+					<br /><br />
 				</div>
-				<button class="tt" style="float: right;margin-bottom: 10px;border: 1px solid;padding: 10px 15px">Tiếp Tục</button>
+				<button class="tt" style="float: right;margin-bottom: 10px;border: 1px solid;padding: 10px 15px">Tiếp
+					Tục</button>
 			</div>
 		</div>
 		<div class="col-sm-3" style="margin-top: 50px">
 			<div style="background-color: #f9f9f9">
-				@foreach ($lichchieu as $l)
-				<input type="hidden" class="idlich" value="{{$l->id}}">
+				<input type="hidden" class="idlich" value="{{$lichchieu->id}}">
 				@if (Auth::check())
 				<input type="hidden" class="iduser" value="{{Auth::user()->id}}">
 				@endif
 				<div class="col-md-12" style="text-align: center;">
-					<img src="/anhda4/phim/{{$l->phim->image}}" width="215" height="150">
+					<img src="/anhda4/phim/{{$lichchieu->phim->image}}" width="215" height="150">
 				</div>
 				<div class="col-md-12">
 					<div>
-						<h4 style="font-size: 16px" id="tenphim">{{$l->phim->tenphim}}</h4>
-						<h4 style="font-size: 14px" id="tentienganh">{{$l->phim->tentienganh}}</h4>
+						<h4 style="font-size: 16px" id="tenphim">{{$lichchieu->phim->tenphim}}</h4>
+						<h4 style="font-size: 14px" id="tentienganh">{{$lichchieu->phim->tentienganh}}</h4>
 					</div>
 					<div>
-						<p><b>Rạp:</b>&nbsp;<span id="tenrap">{{$l->rap->tenrap}}</span></p>
-						<p><b>Phòng:</b>&nbsp;<span id="tenphong">{{$l->phong->tenphong}}</span></p>
-						<p><b>Suất chiếu:</b>&nbsp;<span id="ngay">{{date('d-m-Y', strtotime($l->ngay))}}</span>&nbsp;|&nbsp;<span id="thoigian">{{date('G:i',strtotime($l->time))}}</span></p>
-						@endforeach
-						<div><b>Combo:</b>&nbsp;<div class="comboList"></div></div>
-						<div><b>Ghế:</b>&nbsp;<div class="seatList"></div> </div>
+						<p><b>Rạp:</b>&nbsp;<span id="tenrap">{{$lichchieu->rap->tenrap}}</span></p>
+						<p><b>Phòng:</b>&nbsp;<span id="tenphong">{{$lichchieu->phong->tenphong}}</span></p>
+						<p><b>Suất chiếu:</b>&nbsp;<span
+								id="ngay">{{date('d-m-Y', strtotime($lichchieu->ngay))}}</span>&nbsp;|&nbsp;<span
+								id="thoigian">{{date('G:i',strtotime($lichchieu->time))}}</span></p>
+
+						<div><b>Combo:</b>&nbsp;<div class="comboList"></div>
+						</div>
+						<div><b>Ghế:</b>&nbsp;<div class="seatList"></div>
+						</div>
 					</div>
 					<div>
 						<p><b>Tổng:</b><span id="total"> </span>&nbsp;VNĐ</p>
@@ -138,8 +145,8 @@ foreach ($lichchieu as $lc)
 						<p class="text-danger">Đăng nhập để tiếp tục</p>
 						@else
 						<center>
-						<button id="addve" class="datve">Đặt vé</button>	
-						</center>			
+							<button id="addve" class="datve">Đặt vé</button>
+						</center>
 						@endif
 
 					</div>
@@ -148,7 +155,7 @@ foreach ($lichchieu as $lc)
 		</div>
 	</div>
 </div>
-<script type="text/javascript">	
+<script type="text/javascript">
 	$(document).ready(function() {
 		$(".seatNumber").click(function() {
 			var selectedSeats = parseInt($(".seatSelected").length);
