@@ -247,14 +247,14 @@ class AdminController extends Controller
 		$lich->time=$request->time;
 		$lich->save();
 
-		$ghe=ghe::select('id')->where('id_phong',$request->phong)->get();
-		for ($i=0; $i < count($ghe) ; $i++) { 
-			$ve= new ve;
-			$ve->id_lichchieu=$lich->id;
-			$ve->id_ghe=$ghe[$i]->id;
-			$ve->id_user=null;
-			$ve->save();
-		}
+		// $ghe=ghe::select('id')->where('id_phong',$request->phong)->get();
+		// for ($i=0; $i < count($ghe) ; $i++) { 
+		// 	$ve= new ve;
+		// 	$ve->id_lichchieu=$lich->id;
+		// 	$ve->id_ghe=$ghe[$i]->id;
+		// 	$ve->id_user=null;
+		// 	$ve->save();
+		// }
 		return redirect('admin/qlylichchieu');
 	}
 
