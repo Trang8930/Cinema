@@ -49,7 +49,7 @@
 											{{$v->ghe->row}}{{$v->ghe->number}}
 										</td>
 										<td>
-											{{$v->datcombo->id_combo}}
+											{{$v->datcombo->combo->tencombo}}
 											
 										</td>
 									</tr>

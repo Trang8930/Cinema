@@ -31,7 +31,7 @@ class AdminController extends Controller
 				->leftJoin('lichchieu as l', 'p.id', '=', 'l.id_phim')
 				->leftJoin('ve as v', 'l.id', '=', 'v.id_lichchieu')
 				->groupBy('p.id')
-				->orderBy('id_phim', 'asc')
+				->orderBy('id_phim', 'desc')
 				->paginate(10);
 		//dd($veban);
 		return view('.admin.homeadmin',compact('phimdc','phimsc','tintuc','thanhvien', 'veban'));
@@ -43,12 +43,12 @@ class AdminController extends Controller
 	}
 	public function Qlytintuc()
 	{
-		$tintuc=tintuc::paginate(10);
+		$tintuc=tintuc::orderBy('id', 'desc')->paginate(10);
 		return view('.admin.qlytintuc',compact('tintuc'));
 	}
 	public function Qlyrap()
 	{
-		$rap=rap::paginate(10);
+		$rap=rap::orderBy('id', 'desc')->paginate(10);
 		return view('.admin.qlyrap',compact('rap'));
 	}
 	public function lichchieu()
@@ -67,7 +67,7 @@ class AdminController extends Controller
 	}
 	public function dsphong()
 	{	
-		$phong=phong::paginate(5);
+		$phong=phong::orderBy('id', 'desc')->paginate(5);
 		return view('.admin.qlyphong',compact('phong'));
 	}
 	public function dsghe()
@@ -120,7 +120,7 @@ class AdminController extends Controller
 		// 		->join('datcombo as d', 'v.id_user', '=', 'd.id_user')
 		// 		->join('combo as c', 'd.id_combo', '=', 'c.id')
 		// 		->paginate(10);
-		$ve=ve::paginate(10);
+		$ve=ve::orderBy('id', 'desc')->paginate(10);
 		//dd($ve);
 		return view('.admin.qlyve',compact('ve'));
 	}
