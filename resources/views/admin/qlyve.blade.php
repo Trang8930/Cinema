@@ -25,6 +25,7 @@
 								</thead>
 								<tbody>
 									@php
+									DB::enableQueryLog();
 									$stt=0;
 									if (isset($_GET['page'])) {
 										$a=$_GET['page'];
@@ -48,13 +49,12 @@
 											{{$v->ghe->row}}{{$v->ghe->number}}
 										</td>
 										<td>
+											{{$v->datcombo->id_combo}}
 											
 										</td>
-
-										
-
 									</tr>
 									@endforeach
+									
 								</tbody>
 							</table>
 							{{ $ve->links()}}

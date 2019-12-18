@@ -114,7 +114,14 @@ class AdminController extends Controller
 
 	public function dsve()
 	{
+		
+		// $ve = DB::table('ve as v')
+		// 		->select('v.id', 'v.id_lichchieu', 'v.id_user', 'v.id_ghe', 'c.tencombo')
+		// 		->join('datcombo as d', 'v.id_user', '=', 'd.id_user')
+		// 		->join('combo as c', 'd.id_combo', '=', 'c.id')
+		// 		->paginate(10);
 		$ve=ve::paginate(10);
+		//dd($ve);
 		return view('.admin.qlyve',compact('ve'));
 	}
 

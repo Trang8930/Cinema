@@ -24,4 +24,7 @@ class ve extends Model
     {
         return $this->hasManyThrough('App\phim', 'App\lichchieu','id_phim','id_lichchieu','id');
     }
+    public function datcombo() {
+        return $this->hasOne('App\datcombo','id_user', 'id_user');
+    }
 }
