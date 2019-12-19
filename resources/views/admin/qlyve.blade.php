@@ -25,7 +25,7 @@
 								</thead>
 								<tbody>
 									@php
-									DB::enableQueryLog();
+									
 									$stt=0;
 									if (isset($_GET['page'])) {
 										$a=$_GET['page'];
@@ -49,7 +49,23 @@
 											{{$v->ghe->row}}{{$v->ghe->number}}
 										</td>
 										<td>
-											{{$v->datcombo->combo->tencombo}}
+											{{-- {{$v->datcombo->combo->tencombo}} --}}
+											{{-- {{$v->id_lichchieu}}
+											{{$v->id_user}} --}}
+											@php
+												//DB::enableQueryLog();
+												//dd($v->lichchieu);
+												//$id_lc = $v->lichchieu->id;
+												//dd(DB::getQueryLog());
+												$datcb = DB::table('datcombo')->where('id_user', $v->id_user)->where('id_lichchieu', $v->id_lichchieu)->first();
+												if($datcb != null) {
+													$cb = DB::table('combo')->find($datcb->id_combo);
+													echo $datcb->soluong.' '. $cb->tencombo;
+												}else {
+													echo 'Không đặt';
+												}
+												
+											@endphp
 											
 										</td>
 									</tr>
