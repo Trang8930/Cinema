@@ -374,6 +374,7 @@ class AdminController extends Controller
 			<td>".$l->id."</td>
 			<td>".$l->phim->tenphim."</td>
 			<td>".$l->rap->tenrap."</td>
+			<td>".$l->phong->tenphong."</td>
 			<td>".date('d-m-Y',strtotime($l->ngay))."</td>
 			<td>".date('H:i',strtotime($l->time))."</td>
 			<td><a href='admin/sualichchieu/".$l->id."'><button style='background-color: #ffffff00;border: none' title=\"Sửa\"><i class=\"fas fa-edit text-success\"></i></button></a><br>
