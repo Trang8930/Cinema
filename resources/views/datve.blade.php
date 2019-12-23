@@ -249,6 +249,7 @@ $idl=$lichchieu->id
 					},
 					success:function(response){
 						alert("đặt vé thành công");
+						location.reload();
 					}
 				});
 			}else{

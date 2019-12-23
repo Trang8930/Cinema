@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreatePhongTable extends Migration
 {
@@ -14,10 +14,10 @@ class CreatePhongTable extends Migration
     public function up()
     {
         Schema::create('phong', function (Blueprint $table) {
-            $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
             $table->bigIncrements('id');
             $table->string('tenphong');
+            $table->unsignedBigInteger('id_rap');
+            $table->foreign('id_rap')->references('id')->on('rap')->onDelete('cascade');
             $table->timestamps();
         });
     }

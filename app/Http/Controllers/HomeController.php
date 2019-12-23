@@ -18,9 +18,11 @@ use App\ve;
 use App\phong;
 use App\rap;
 use App\datcombo;
+use App\lienhe;
 use App\tintuc;
 use Illuminate\Support\collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -194,6 +196,32 @@ class HomeController extends Controller
         $tintuc = tintuc::select()->where('theloai', 0)->orderBy('id', 'desc')->paginate(5);
         $phimdc = phim::where('trangthai', '1')->orderBy('id', 'desc')->limit(3)->get();
         return view('tintuc', compact('tintuc', 'phimdc'));
+    }
+
+    public function lienHe() {
+        $phimdc = phim::where('trangthai', '1')->orderBy('id', 'desc')->limit(3)->get();
+        return view('lienhe', compact('phimdc'));
+    }
+
+    public function postLienHe(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'ho_ten' => 'required',
+            'email' => 'required|email',
+            'sdt' => 'required',
+            'noi_dung' => 'required',
+        ]);
+        if($validator->fails()) {
+            return redirect()->route('lienhe')->withErrors($validator);
+        } else{
+            //dd($request->all());
+            $lh = new lienhe();
+            $lh->ho_ten = $request->ho_ten;
+            $lh->email = $request->email;
+            $lh->sdt = $request->sdt;
+            $lh->noi_dung = $request->noi_dung;
+            $lh->save();
+            return redirect()->route('lienhe')->with('msg', 'Cảm ơn bạn đã để lại phản hồi');
+        }
     }
     public function muaVe()
     {

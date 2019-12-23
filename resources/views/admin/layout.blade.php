@@ -65,6 +65,7 @@
         <li class="sidebar-list-item"><a href="{{url('admin/qlyghe')}}" class="sidebar-link text-dark"><i class="o-survey-1 mr-3 text-gray"></i><span>Quản Lý Ghế</span></a></li>
         <li class="sidebar-list-item"><a href="{{url('admin/qlycombo')}}" class="sidebar-link text-dark"><i class="o-survey-1 mr-3 text-gray"></i><span>Quản Lý Combo</span></a></li>
         <li class="sidebar-list-item"><a href="{{url('admin/users')}}" class="sidebar-link text-dark"><i class="o-survey-1 mr-3 text-gray"></i><span>Quản Lý User</span></a></li>
+        <li class="sidebar-list-item"><a href="{{url('admin/lien-he')}}" class="sidebar-link text-dark"><i class="o-survey-1 mr-3 text-gray"></i><span>Quản Lý Liên Hệ</span></a></li>
       </ul>
 
     </div>

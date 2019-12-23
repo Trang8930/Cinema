@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateTableCmtphim extends Migration
+class CreateCmtphimTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,10 +15,10 @@ class CreateTableCmtphim extends Migration
     {
         Schema::create('cmtphim', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('id_phim')->unsigned();
-            $table->foreign('id_phim')->references('id')->on('phim');
-            $table->bigInteger('id_user')->unsigned();
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->unsignedBigInteger('id_phim');
+            $table->foreign('id_phim')->references('id')->on('phim')->onDelete('cascade');
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->text('noidung');
             $table->timestamps();
         });

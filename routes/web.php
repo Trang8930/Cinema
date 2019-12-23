@@ -78,7 +78,7 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'], function() {
 	Route::get('xoacombo/{id}','AdminController@xoacombo');
 	Route::get('suacombo/{id}','AdminController@formsuacombo');
 	Route::post('suacombo/{id}','AdminController@suacombo');
-
+	Route::get('lien-he', 'AdminController@lienHe')->name('qlylienhe');
 });
 Route::get('ajax/ghe/{id}','AdminController@showghe');
 Route::get('ajax/lichchieu/{id}','AdminController@getlich');
@@ -113,3 +113,5 @@ Route::get('lienket', function() {
 Route::get('themghe', 'HomeController@themghe');
 Route::get('tin-tuc', 'HomeController@getTintuc')->name('tinTuc');
 Route::get('mua-ve', 'HomeController@muaVe')->name('muave');
+Route::get('lien-he', 'HomeController@lienHe')->name('lienhe');
+Route::post('lien-he', 'HomeController@postLienHe')->name('postLienHe');

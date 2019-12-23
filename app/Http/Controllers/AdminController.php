@@ -15,6 +15,7 @@ use App\ve;
 use App\datcombo;
 use App\cmtphim;
 use App\cmttintuc;
+use App\lienhe;
 use App\row;
 use Illuminate\Support\Facades\DB;
 
@@ -488,6 +489,9 @@ class AdminController extends Controller
 
 		return redirect('admin/qlytintuc');
 	}
-
+	public function lienHe() {
+		$lienhe = lienhe::orderBy('created_at', 'desc')->paginate(10);
+		return view('admin.qlylienhe', compact('lienhe'));
+	}
 	
 }

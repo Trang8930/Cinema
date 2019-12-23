@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateLichchieuTable extends Migration
 {
@@ -14,13 +14,13 @@ class CreateLichchieuTable extends Migration
     public function up()
     {
         Schema::create('lichchieu', function (Blueprint $table) {
-            $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
             $table->bigIncrements('id');
-            $table->bigInteger('id_phim')->unsigned();
-            $table->foreign('id_phim')->references('id')->on('phim');
-            $table->bigInteger('id_rap')->unsigned();
-            $table->foreign('id_rap')->references('id')->on('rap');
+            $table->unsignedBigInteger('id_phim');
+            $table->foreign('id_phim')->references('id')->on('phim')->onDelete('cascade');
+            $table->unsignedBigInteger('id_phong');
+            //$table->foreign('id_phong')->references('id')->on('phong')->onDelete('cascade');
+            $table->unsignedBigInteger('id_rap');
+            //$table->foreign('id_rap')->references('id')->on('rap')->onDelete('cascade');
             $table->date('ngay');
             $table->timestamp('time');
             $table->timestamps();

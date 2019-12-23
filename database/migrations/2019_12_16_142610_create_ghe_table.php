@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateGheTable extends Migration
 {
@@ -14,12 +14,11 @@ class CreateGheTable extends Migration
     public function up()
     {
         Schema::create('ghe', function (Blueprint $table) {
-             $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
             $table->bigIncrements('id');
-            $table->bigInteger('id_phong')->unsigned();
-            $table->foreign('id_phong')->references('id')->on('phong')->onDelete('cascade');
-            $table->string('hangghe');
+            $table->string('row');
+            $table->bigInteger('number');
+            $table->unsignedBigInteger('id_phong');
+            //$table->foreign('id_phong')->references('id')->on('phong')->onDelete('cascade');
             $table->timestamps();
         });
     }

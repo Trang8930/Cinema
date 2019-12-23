@@ -21,7 +21,7 @@
 			<a href="{{route('tinTuc')}}" class="nav-link">Tin Tức</a>
 			</li>
 			<li class="nav-item pl-3">
-				<a href="" class="nav-link">Liên Hệ</a>
+			<a href="{{route('lienhe')}}" class="nav-link">Liên Hệ</a>
 			</li>
 			<li class="nav-item pl-3">
 				<form action="/search" method="post">
