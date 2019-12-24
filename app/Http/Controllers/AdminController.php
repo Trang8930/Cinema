@@ -259,7 +259,7 @@ class AdminController extends Controller
 							->where('time','>=', $hour.':'.$minutes)
 							->first();
 		//dd(DB::getQueryLog());
-		dd($check);
+		//dd($check);
 		if($check === null) {
 			$lich->id_phim = $request->phim;
 			$lich->id_rap = $request->rap;
