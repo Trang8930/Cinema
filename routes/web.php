@@ -61,7 +61,7 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'], function() {
 	Route::post('suarap/{id}','AdminController@suarap');
 	Route::get('xoarap/{id}','AdminController@xoarap');
 
-	Route::get('addlichchieu','AdminController@formlich');
+	Route::get('addlichchieu','AdminController@formlich')->name('addlc');
 	Route::post('addlich','AdminController@addlich');
 	Route::get('sualichchieu/{idlc}','AdminController@formsualich')->name('formsualich');
 	Route::post('sualich','AdminController@sualich');

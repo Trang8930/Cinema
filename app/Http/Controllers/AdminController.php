@@ -247,13 +247,30 @@ class AdminController extends Controller
 	}
 	public function addlich(Request $request)
 	{
-		$lich= new lichchieu;
-		$lich->id_phim=$request->phim;
-		$lich->id_rap=$request->rap;
-		$lich->id_phong=$request->phong;
-		$lich->ngay=$request->ngay;
-		$lich->time=$request->time;
-		$lich->save();
+		$lich = new lichchieu;
+		DB::enableQueryLog();
+		$hour = explode(':', $request->time)[0] - 2;
+		$minutes = explode(':', $request->time)[1];
+		//dd($hour.':'.$minutes);
+		$check = lichchieu::where('id_rap', $request->rap)
+							->where('id_phong', $request->phong)
+							->where('ngay', $request->ngay)
+							->where('time','<=', $request->time)
+							->where('time','>=', $hour.':'.$minutes)
+							->first();
+		//dd(DB::getQueryLog());
+		dd($check);
+		if($check === null) {
+			$lich->id_phim = $request->phim;
+			$lich->id_rap = $request->rap;
+			$lich->id_phong = $request->phong;
+			$lich->ngay = $request->ngay;
+			$lich->time = $request->time;
+			$lich->save();
+			return redirect('admin/qlylichchieu');
+		}else {
+			return redirect()->route('addlc')->with('error', 'Trùng lịch!!');
+		}
 
 		// $ghe=ghe::select('id')->where('id_phong',$request->phong)->get();
 		// for ($i=0; $i < count($ghe) ; $i++) { 
@@ -263,7 +280,7 @@ class AdminController extends Controller
 		// 	$ve->id_user=null;
 		// 	$ve->save();
 		// }
-		return redirect('admin/qlylichchieu');
+		
 	}
 
 	public function formsualich($idlc)

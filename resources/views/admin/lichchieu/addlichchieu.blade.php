@@ -10,6 +10,9 @@
 							<h3 class="h6 text-uppercase mb-0">Thêm Lịch</h3>
 						</div>
 						<div class="card-body">
+							@if(Session::has('error'))
+							<div class="alert alert-danger">{{Session::get('error')}}</div>
+							@endif
 							<form action="{{url('admin/addlich')}}" method="POST" class="form-horizontal">
 								{{ csrf_field() }}
 								
