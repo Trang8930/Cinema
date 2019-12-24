@@ -90,6 +90,9 @@ $idl=$lichchieu->id
 									<div class="seatRowName">
 										{{$g->row}}
 									</div>
+									@php
+										$check = false;
+									@endphp
 									@foreach ($g['number'] as $n)
 										@php
 											foreach ($ve as $key => $value) {
