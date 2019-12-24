@@ -1,7 +1,7 @@
 @extends('master')
 @section('content')
 @php
-$idl=null;
+//$idl=null;
 $idl=$lichchieu->id
 
 @endphp
@@ -91,7 +91,19 @@ $idl=$lichchieu->id
 										{{$g->row}}
 									</div>
 									@foreach ($g['number'] as $n)
-										@if (($n->ve->id_lichchieu== $idl ) && ($n->ve->id_user !=null))
+										@php
+											foreach ($ve as $key => $value) {
+												if($value['id_ghe'] == $n->id) {
+													$check = true; // da ton tai
+												break;
+												}else {
+													$check = false;
+												}
+											}
+										@endphp
+										{{-- <span>ghe {{$n}}</span> --}}
+										{{-- @if (($n->ve->id_lichchieu== $idl ) && ($n->ve->id_user !=null)) --}}
+										@if ($check)
 											<div id="{{$n->id}}" class="seatNumber seatDisable" value="{{$n->row}}{{$n->number}}">{{$n->number}}</div>
 										@else
 											<div id="{{$n->id}}" class="seatNumber" value="{{$n->row}}{{$n->number}}">{{$n->number}}</div>

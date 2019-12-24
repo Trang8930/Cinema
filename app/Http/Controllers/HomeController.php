@@ -77,12 +77,10 @@ class HomeController extends Controller
         //dd($ghe);
         for ($i = 0; $i < count($ghe); $i++) {
             $g = ghe::where([['id_phong', $lichchieu->id_phong], ['row', $ghe[$i]->row]])->get();
-
             $ghe[$i]['number'] = $g;
         }
         //dd($ghe);
-
-        $ve = ve::where('id_lichchieu', $id)->get();
+        $ve = ve::where('id_lichchieu', $id)->get()->toArray();
         return view('datve', compact('lichchieu', 'cb', 'ghe', 've'));
     }
 
