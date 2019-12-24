@@ -252,15 +252,22 @@ class AdminController extends Controller
 		$hour = explode(':', $request->time)[0] - 2;
 		$minutes = explode(':', $request->time)[1];
 		//dd($hour.':'.$minutes);
+		$hour2 = explode(':', $request->time)[0] + 2;
 		$check = lichchieu::where('id_rap', $request->rap)
 							->where('id_phong', $request->phong)
 							->where('ngay', $request->ngay)
 							->where('time','<=', $request->time)
 							->where('time','>=', $hour.':'.$minutes)
 							->first();
+		$check2 = lichchieu::where('id_rap', $request->rap)
+							->where('id_phong', $request->phong)
+							->where('ngay', $request->ngay)
+							->where('time', '>=', $request->time)
+							->where('time', '<=', $hour2.':'.$minutes)
+							->first();
 		//dd(DB::getQueryLog());
-		//dd($check);
-		if($check === null) {
+		//dd($check2);
+		if($check === null && $check2 === null) {
 			$lich->id_phim = $request->phim;
 			$lich->id_rap = $request->rap;
 			$lich->id_phong = $request->phong;
