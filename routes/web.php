@@ -93,7 +93,7 @@ Route::get('dangxuat','HomeController@dangxuat');
 Route::get('xemlich','HomeController@lich');
 // Route::resource('ajaxdatve', 'datveajax');
 Route::get('/ajaxdatve','HomeController@datve');
-Route::post('cmt/{id}','HomeController@postcmt')->middleware('admin');
+Route::post('cmt/{id}','HomeController@postcmt')->middleware('auth');
 
 Route::group(['prefix' => 'user','middleware' => 'auth'], function() {
 	Route::get('/','UserController@index');
