@@ -18,7 +18,7 @@ class AdminMiddleware
     {
         if (Auth::check()) {
             $user=Auth::user();
-            if ($user->level==1 || $user->level == 0) 
+            if ($user->level==1) 
                 return $next($request);
             else
                 return redirect('/dangnhap');
