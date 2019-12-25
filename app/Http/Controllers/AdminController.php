@@ -517,5 +517,13 @@ class AdminController extends Controller
 		$lienhe = lienhe::orderBy('created_at', 'desc')->paginate(10);
 		return view('admin.qlylienhe', compact('lienhe'));
 	}
+
+	public function accept($ve_id) {
+		//dd($ve_id);
+		$ve = ve::find($ve_id);
+		$ve->status = 1;
+		$ve->save();
+		return '<span class="badge badge-success">Đặt thành công</span>';
+	}
 	
 }

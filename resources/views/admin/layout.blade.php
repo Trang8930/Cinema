@@ -96,5 +96,6 @@
   <script src="/admin_assets/js/charts-home.js"></script>
   <script src="/admin_assets/js/front.js"></script>
   <script src="/js/adminjs.js"></script>
+  @yield('acceptjs')
 </body>
 </html>

@@ -85,6 +85,7 @@ Route::get('ajax/lichchieu/{id}','AdminController@getlich');
 Route::get('ajax/phong/{id}','AdminController@getphong');
 Route::get('ajax/rap/{idphim}', 'HomeController@getRapTheoPhim');
 Route::get('ajax/xem-phong/{idphim}/{idrap}', 'HomeController@getPhongTheoPhimRap');
+Route::get('ajax/accept/{ve_id}', 'AdminController@accept');
 Route::get('dangnhap','HomeController@formdangnhap');
 Route::post('login','Controller@dangnhap');
 Route::get('dangky','Controller@getdangky');

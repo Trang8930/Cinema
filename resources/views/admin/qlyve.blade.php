@@ -21,6 +21,7 @@
 										<th>Lịch chiếu</th>
 										<th>Ghế</th>
 										<th>Combo</th>
+										<th>Trạng thái</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -68,6 +69,13 @@
 											@endphp
 											
 										</td>
+										<td>
+											@if($v->status == 1)
+											<span class="badge badge-success">Đặt thành công</span>
+											@else
+											<span class="badge badge-warning accept" style="cursor: pointer;" ve_id="{{$v->id}}">Chờ duyệt</span>
+											@endif
+										</td>
 									</tr>
 									@endforeach
 									
@@ -94,4 +102,27 @@
 		</div>
 	</footer>
 </div>
+@endsection
+
+@section('acceptjs')
+<script>
+	$('.accept').on('click', function() {
+		var ve_id = $(this).attr('ve_id');
+		
+		//console.log('Ahihih');
+		$.ajax({
+			type:'get',
+			url:'/ajax/accept/'+ ve_id,
+			data:{
+			},
+			context: this,
+			success:function(response){
+				$(this).text('Đặt thành công');
+				$(this).removeAttr('style');
+				$(this).removeClass('badge-warning');
+				$(this).addClass('badge-success');
+			}
+		});
+	});
+</script>
 @endsection
