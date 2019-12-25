@@ -19,7 +19,7 @@ class UserController extends Controller
 {
 	public function index()
 	{
-		$ve=ve::where('id_user', Auth::user()->id)->get();
+		$ve=ve::where('id_user', Auth::user()->id)->orderBy('id', 'desc')->get();
 		$count=ve::where('id_user', Auth::user()->id)->count();
 		return view('users.index', compact('ve', 'count'));
 	}

@@ -263,7 +263,7 @@ $idl=$lichchieu->id
 						allcombo:allcombo
 					},
 					success:function(response){
-						alert("đặt vé thành công");
+						alert("đặt vé thành công, chờ xác nhận lại");
 						location.reload();
 					}
 				});

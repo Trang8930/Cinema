@@ -68,7 +68,8 @@
 										<th scope="col">Tên Phim</th>
 
 										<th scope="col">Lịch chiếu</th>
-										<th scope="col">Ghế</th>
+                                        <th scope="col">Ghế</th>
+                                        <th>Trạng thái</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -84,7 +85,13 @@
 										<td class="align-middle">
                                         {{$v->ghe->row}}{{$v->ghe->number}}
 										</td>
-
+                                        <td>
+                                            @if($v->status == 1)
+                                            <span class="badge badge-success">Đặt thành công</span>
+                                            @else
+                                            <span class="badge badge-warning">Chờ xác nhận</span>
+                                            @endif
+                                        </td>
 									</tr>
                                     <?php $stt++; ?>
 									@endforeach
